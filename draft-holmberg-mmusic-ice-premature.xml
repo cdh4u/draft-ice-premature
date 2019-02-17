@@ -12,9 +12,9 @@
 <rfc ipr="trust200902" category="std" docName="draft-holmberg-mmusic-ice-premature-latest" obsoletes="" updates="8445" submissionType="IETF" xml:lang="en">
   <front>
     <title abbrev="ICE Premature">
-      Prevent Premature Interactive Connectivity Establishment (ICE) Failures
+      Preventing Premature Interactive Connectivity Establishment (ICE) Failures
     </title>
-      <author initials="C.H." surname="Holmberg" fullname="Christer Holmberg">
+    <author initials="C.H." surname="Holmberg" fullname="Christer Holmberg">
       <organization>Ericsson</organization>
       <address>
         <postal>
@@ -26,7 +26,19 @@
         <email>christer.holmberg@ericsson.com</email>
       </address>
     </author>
-  
+    <author initials="J." surname="Uberti" fullname="Justin Uberti">
+      <organization>Google</organization>
+      <address>
+        <postal>
+          <street>747 6th St W</street>
+          <code>98033</code>
+          <city>Kirkland</city>
+          <country>USA</country>
+        </postal>
+        <email>justin@uberti.name</email>
+      </address>
+    </author>
+
     <date year="2019"/>
     <area>Transport</area>
     <workgroup>MMUSIC Working Group</workgroup>
@@ -42,7 +54,7 @@
   <middle>
     <section title="Introduction" toc="default">
       <t>
-        <xref target="RFC8445"></xref> describes a protocol, Interactive Connectivity Establishment (ICE), 
+        <xref target="RFC8445"></xref> describes a protocol, Interactive Connectivity Establishment (ICE),
         for Network Address Translator (NAT) traversal for UDP-based communication.
       </t>
       <t>
@@ -51,8 +63,8 @@
         are a number of reasons why a candidate is discared, e.g., because it represents an IP version
         that is not supported by the endpoint, or if the connection-address associated with the candidate
         is represented by a Fully Qualified Domain Name (FQDN) that the endpoint is not able to resolve.
-        Similairly, as a candidate by definition represents a single connection-address, if a FQDN 
-        resoles into multiple connection-addresses the associated candidate needs to be discared. 
+        Similairly, as a candidate by definition represents a single connection-address, if a FQDN
+        resoles into multiple connection-addresses the associated candidate needs to be discared.
       </t>
       <t>
         NOTE: Future specifications might describe how FQDNs that resolve into multiple connection-addresses
@@ -64,7 +76,7 @@
         the session establishment, as the endpoint's list of remote candidates will be empty.
       </t>
       <t>
-        Once the endpoints have exchanged the initial set of candidates, and start performing connectivity 
+        Once the endpoints have exchanged the initial set of candidates, and start performing connectivity
         cheks, additional candidiates might be created as a result of the connectivity checks. Such candidates
         are referred to as peer relexive candidates. However, the endpoint will most likely have declared
         ICE failure before it is able to create such candidates.
@@ -77,7 +89,7 @@
         using the normal procedures defined in <xref target="RFC8445"></xref>.
       </t>
     </section>
- 
+
     <section title="Conventions">
       <t>
         The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
@@ -112,7 +124,7 @@
     <references title="Normative References">
       <?rfc include="reference.RFC.2119"?>
       <?rfc include="reference.RFC.8174"?>
-      <?rfc include="reference.RFC.8445"?> 
+      <?rfc include="reference.RFC.8445"?>
     </references>
   </back>
 </rfc>
