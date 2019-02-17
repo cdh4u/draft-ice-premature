@@ -12,9 +12,9 @@
 <rfc ipr="trust200902" category="std" docName="draft-holmberg-mmusic-ice-premature-latest" obsoletes="" updates="8445" submissionType="IETF" xml:lang="en">
   <front>
     <title abbrev="ICE Premature">
-      Prevent Premature Interactive Connectivity Establishment (ICE) Failures
+      Preventing Premature Interactive Connectivity Establishment (ICE) Failures
     </title>
-      <author initials="C.H." surname="Holmberg" fullname="Christer Holmberg">
+    <author initials="C.H." surname="Holmberg" fullname="Christer Holmberg">
       <organization>Ericsson</organization>
       <address>
         <postal>
@@ -24,6 +24,18 @@
           <country>Finland</country>
         </postal>
         <email>christer.holmberg@ericsson.com</email>
+      </address>
+    </author>
+    <author initials="J." surname="Uberti" fullname="Justin Uberti">
+      <organization>Google</organization>
+      <address>
+        <postal>
+          <street>747 6th St W</street>
+          <code>98033</code>
+          <city>Kirkland</city>
+          <country>USA</country>
+        </postal>
+        <email>justin@uberti.name</email>
       </address>
     </author>
 
