@@ -64,27 +64,25 @@
         it is marked accordingly, and if all pairs have failed, the overall
         ICE process is considered to have failed.
       </t>
-      <t>During the process of connectivity checks, additional candidates may
-        be created as a result of successful inbound checks. Such candidates
-        are referred to as peer-reflexive candidates, and once discovered, will
-        be used to form new candidate pairs which will be tested like any other.
-        However, there is an inherent race condition here; if an endpoint
-        runs out of viable candidate pairs before learning about the
-        peer-reflexive candidates, it will prematurely fail the overall ICE
-        process. This race condition can occur in many common situations.
+      <t>
+        During the process of connectivity checks, additional candidates may
+        be created as a result of successful inbound checks from the remote
+        peer. Such candidates are referred to as peer-reflexive candidates,
+        and once discovered, will be used to form new candidate pairs which will
+        be tested like any other. However, there is an inherent race condition
+        here; if, before learning about any peer-reflexive candidates, an
+        endpoint runs out of candidate pairs to check, either because it has
+        none, or it considers them all to have failed, it will prematurely
+        declare failure and terminate ICE processing. This race condition can
+        occur in many common situations.
       </t>
       <t>
         This specification updates <xref target="RFC8445"></xref>, by simply
         requiring that an endpoint wait a minimum amount of time before
-        declaring ICE failure, even if all candidate pairs have failed, or there
-        are no candidate pairs to check. This delay provides enough time for the
-        discovery of peer-reflexive candidates, which may eventually lead to the
-        success of the ICE process.
-      </t>
-      <t>
-        One consequence of this change is that ICE will never fail fast, but
-        given that fast failure only occurred in specific scenarios, this will
-        have negligible real-world downside.
+        declaring ICE failure, even if there are no candidate pairs to check,
+        or if all candidate pairs have failed. This delay provides enough time
+        for the discovery of peer-reflexive candidates, which may eventually
+        lead to ICE processing completing successfully.
       </t>
     </section>
 
@@ -117,7 +115,7 @@
         </t>
         <section title="No Candidates From Peer">
           <t>
-            It is entirely legal for an ICE Agent to provide zero candidates of
+            It is entirely legal for an ICE gent to provide zero candidates of
             its own. If the agent somehow knows that the remote endpoint is
             directly reachable, gathering local candidates is unnecessary and
             will only cause delays; the remote endpoint can discover the
@@ -132,7 +130,7 @@
         </section>
         <section title="All Candidates Discarded">
           <t>
-            Even if the ICE Agent provides candidates, they may be discarded
+            Even if the ICE agent provides candidates, they may be discarded
             by the remote endpoint if it does not know what to do with them.
             For example, candidates may use an address family that the remote
             endpoint does not support, (e.g., a host candidate with an IPv6
@@ -153,7 +151,7 @@
             failed, well before the connectivity check timeout.
           </t>
           <t>
-            As a result, even if the ICE Agent provides usable candidates,
+            As a result, even if the ICE agent provides usable candidates,
             the pairs created by the remote endpoint may fail immediately when
             checked, e.g., a check to a nonroutable address that receives an
             immediate ICMP error.
@@ -168,14 +166,37 @@
 
     <section title="Update to RFC 8445">
       <t>
-        In order to avoid this problem, the ICE Agent needs to wait enough
-        time to allow peer-reflexive candidates to be discovered. Accordingly,
-        when beginning ICE checks [add reference], the ICE Agent SHOULD set a
-        timer with duration equal to that of the ICE connectivity check timeout.
-        If, while this timer is running, a checklist has no pairs left to check,
+        In order to avoid the problem raised by this document, the ICE agent
+        needs to wait enough time to allow peer-reflexive candidates to be
+        discovered. Accordingly, when full ICE implementations begin their
+        ICE processing, as described in <xref target="8445" />, Section
+        6.1, the ICE agent MUST set a timer, and its duration SHOULD be
+        equal to the ICE agent's connectivity check timeout.
+      </t>
+      <t>
+        This timeout value is chosen to roughly coincide with the maximum
+        possible duration of ICE connectivity checks from the remote peer,
+        which, if successful, could create peer-reflexive candidates. Because
+        the ICE agent doesn't know the exact number of candidate pairs and pacing
+        interval in use by the remote side, this timeout value is simply a
+        guess, albeit an educated one. Regardless, for this particular problem,
+        the desired benefits will be realized as long as the ICE agent waits
+        some reasonable amount of time.
+      </t>
+      <t>
+        While the timer is running, if a checklist has no pairs left to check,
         i.e., there are no pairs that are not in the failed state, the ICE
-        Agent MUST not conclude that ICE processing has failed, and MUST wait
+        agent MUST not conclude that ICE processing has failed, and MUST wait
         for the timer to elapse before doing so.
+      </t>
+      <t>
+        One consequence of this behavior is that in cases where ICE should fail,
+        e.g., where both sides provide candidates with unresolvable FQDNs
+        ICE will no longer fail immediately, and only fail when the
+        aforementioned timer expires. However, because most ICE scenarios
+        require an extended period of time to determine failure, the
+        fact that some specific scenarios no longer fail fast should have
+        minimal application impact, if any.
       </t>
     </section>
 
