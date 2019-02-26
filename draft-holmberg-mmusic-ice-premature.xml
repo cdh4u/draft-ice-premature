@@ -142,7 +142,7 @@
             In these scenarios, when the candidates are discarded, the
             checklist at the remote endpoint will once again be empty, leading
             to immediate ICE failure.
-          </>
+          </t>
         </section>
         <section title="Immediate Candidate Pair Failure">
           <t>
@@ -161,7 +161,6 @@
             only failed pairs, resulting in immediate ICE failure.
           </t>
         </section>
-      </t>
     </section>
 
     <section title="Update to RFC 8445">
@@ -169,7 +168,7 @@
         In order to avoid the problem raised by this document, the ICE agent
         needs to wait enough time to allow peer-reflexive candidates to be
         discovered. Accordingly, when full ICE implementations begin their
-        ICE processing, as described in <xref target="8445" />, Section
+        ICE processing, as described in <xref target="RFC8445" />, Section
         6.1, the ICE agent MUST set a timer, and its duration SHOULD be
         equal to the ICE agent's connectivity check timeout.
       </t>
