@@ -9,7 +9,7 @@
 <?rfc subcompact="yes" ?>
 <?rfc sortrefs="no" ?>
 <?rfc strict="yes" ?>
-<rfc ipr="trust200902" category="std" docName="draft-holmberg-mmusic-ice-premature-latest" obsoletes="" updates="8445" submissionType="IETF" xml:lang="en">
+<rfc ipr="trust200902" category="std" docName="draft-holmberg-ice-premature-latest" obsoletes="" updates="8445" submissionType="IETF" xml:lang="en">
   <front>
     <title abbrev="ICE Premature">
       Preventing Premature Interactive Connectivity Establishment (ICE) Failures
@@ -41,7 +41,7 @@
 
     <date year="2019"/>
     <area>Transport</area>
-    <workgroup>MMUSIC Working Group</workgroup>
+    <workgroup>ICE Working Group</workgroup>
     <keyword>ICE</keyword>
     <keyword>Candidate</keyword>
     <abstract>
