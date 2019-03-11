@@ -9,10 +9,10 @@
 <?rfc subcompact="yes" ?>
 <?rfc sortrefs="no" ?>
 <?rfc strict="yes" ?>
-<rfc ipr="trust200902" category="std" docName="draft-holmberg-ice-premature-latest" obsoletes="" updates="8445" submissionType="IETF" xml:lang="en">
+<rfc ipr="trust200902" category="std" docName="draft-holmberg-ice-pac-latest" obsoletes="" updates="8445" submissionType="IETF" xml:lang="en">
   <front>
     <title abbrev="ICE Premature">
-      Preventing Premature Interactive Connectivity Establishment (ICE) Failures
+      Interactive Connectivity Establishment Patiently Awaiting Candidates (ICE PAC)
     </title>
     <author initials="C.H." surname="Holmberg" fullname="Christer Holmberg">
       <organization>Ericsson</organization>
@@ -43,6 +43,7 @@
     <area>Transport</area>
     <workgroup>ICE Working Group</workgroup>
     <keyword>ICE</keyword>
+    <keyword>PAC</keyword>
     <keyword>Candidate</keyword>
     <abstract>
       <t>
